@@ -151,6 +151,10 @@ const config: HardhatUserConfig = {
       url: "https://alfajores-forno.celo-testnet.org",
       accounts: [deployerPrivateKey],
     },
+    zircuit: {
+      url: "https://garfield-testnet.zircuit.com/",
+      accounts: [deployerPrivateKey],
+    },
   },
   // Configuration for harhdat-verify plugin
   etherscan: {

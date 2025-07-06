@@ -4,6 +4,443 @@
  */
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
-const deployedContracts = {} as const;
+const deployedContracts = {
+  31337: {
+    Verifier: {
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      abi: [
+        {
+          inputs: [
+            {
+              components: [
+                {
+                  components: [
+                    {
+                      internalType: "uint256",
+                      name: "X",
+                      type: "uint256",
+                    },
+                    {
+                      internalType: "uint256",
+                      name: "Y",
+                      type: "uint256",
+                    },
+                  ],
+                  internalType: "struct Pairing.G1Point",
+                  name: "a",
+                  type: "tuple",
+                },
+                {
+                  components: [
+                    {
+                      internalType: "uint256[2]",
+                      name: "X",
+                      type: "uint256[2]",
+                    },
+                    {
+                      internalType: "uint256[2]",
+                      name: "Y",
+                      type: "uint256[2]",
+                    },
+                  ],
+                  internalType: "struct Pairing.G2Point",
+                  name: "b",
+                  type: "tuple",
+                },
+                {
+                  components: [
+                    {
+                      internalType: "uint256",
+                      name: "X",
+                      type: "uint256",
+                    },
+                    {
+                      internalType: "uint256",
+                      name: "Y",
+                      type: "uint256",
+                    },
+                  ],
+                  internalType: "struct Pairing.G1Point",
+                  name: "c",
+                  type: "tuple",
+                },
+              ],
+              internalType: "struct Verifier.Proof",
+              name: "proof",
+              type: "tuple",
+            },
+            {
+              internalType: "uint256[2]",
+              name: "input",
+              type: "uint256[2]",
+            },
+          ],
+          name: "verifyTx",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "r",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+  },
+  48898: {
+    Verifier: {
+      address: "0xFa85888d6B6e5276E1C6749CAeE6E7719f8c704b",
+      abi: [
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "user",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "bool",
+              name: "success",
+              type: "bool",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "timestamp",
+              type: "uint256",
+            },
+          ],
+          name: "VerificationResult",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "user",
+              type: "address",
+            },
+          ],
+          name: "getUserStats",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "total",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "successful",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "successRate",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getVerificationStats",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "total",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "successful",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "successRate",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "successfulVerifications",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "totalVerifications",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          name: "userSuccessfulVerifications",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          name: "userVerifications",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              components: [
+                {
+                  components: [
+                    {
+                      internalType: "uint256",
+                      name: "X",
+                      type: "uint256",
+                    },
+                    {
+                      internalType: "uint256",
+                      name: "Y",
+                      type: "uint256",
+                    },
+                  ],
+                  internalType: "struct Pairing.G1Point",
+                  name: "a",
+                  type: "tuple",
+                },
+                {
+                  components: [
+                    {
+                      internalType: "uint256[2]",
+                      name: "X",
+                      type: "uint256[2]",
+                    },
+                    {
+                      internalType: "uint256[2]",
+                      name: "Y",
+                      type: "uint256[2]",
+                    },
+                  ],
+                  internalType: "struct Pairing.G2Point",
+                  name: "b",
+                  type: "tuple",
+                },
+                {
+                  components: [
+                    {
+                      internalType: "uint256",
+                      name: "X",
+                      type: "uint256",
+                    },
+                    {
+                      internalType: "uint256",
+                      name: "Y",
+                      type: "uint256",
+                    },
+                  ],
+                  internalType: "struct Pairing.G1Point",
+                  name: "c",
+                  type: "tuple",
+                },
+              ],
+              internalType: "struct Verifier.Proof",
+              name: "proof",
+              type: "tuple",
+            },
+            {
+              internalType: "uint256[2]",
+              name: "input",
+              type: "uint256[2]",
+            },
+          ],
+          name: "verifyTx",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "r",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+    YourContract: {
+      address: "0x5C568fcf62b4E6535Af8b5294E998B89f1428891",
+      abi: [
+        {
+          inputs: [],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "_from",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "_to",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "_value",
+              type: "uint256",
+            },
+          ],
+          name: "Transfer",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "balanceOf",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "name",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "owner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "symbol",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "totalSupply",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "to",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "transfer",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+  },
+} as const;
 
 export default deployedContracts satisfies GenericContractsDeclaration;

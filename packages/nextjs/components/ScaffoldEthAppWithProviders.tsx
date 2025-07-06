@@ -45,14 +45,25 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
     setMounted(true);
   }, []);
 
+  // 防止 hydration 不匹配，在挂载前使用 lightTheme
+  if (!mounted) {
+    return (
+      <WagmiProvider config={wagmiConfig}>
+        <QueryClientProvider client={queryClient}>
+          <ProgressBar height="3px" color="#2299dd" />
+          <RainbowKitProvider avatar={BlockieAvatar} theme={lightTheme()}>
+            <ScaffoldEthApp>{children}</ScaffoldEthApp>
+          </RainbowKitProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
+    );
+  }
+
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <ProgressBar height="3px" color="#2299dd" />
-        <RainbowKitProvider
-          avatar={BlockieAvatar}
-          theme={mounted ? (isDarkMode ? darkTheme() : lightTheme()) : lightTheme()}
-        >
+        <RainbowKitProvider avatar={BlockieAvatar} theme={isDarkMode ? darkTheme() : lightTheme()}>
           <ScaffoldEthApp>{children}</ScaffoldEthApp>
         </RainbowKitProvider>
       </QueryClientProvider>

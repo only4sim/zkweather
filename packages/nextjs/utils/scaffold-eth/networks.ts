@@ -1,3 +1,4 @@
+import { zircuitTestnet } from "./chains";
 import * as chains from "viem/chains";
 import scaffoldConfig from "~~/scaffold.config";
 
@@ -89,6 +90,9 @@ export const NETWORKS_EXTRA_DATA: Record<string, ChainAttributes> = {
   },
   [chains.celoAlfajores.id]: {
     color: "#476520",
+  },
+  [zircuitTestnet.id]: {
+    color: "#6d28d9",
   },
 };
 

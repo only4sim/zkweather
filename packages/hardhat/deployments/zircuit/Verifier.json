@@ -1,0 +1,350 @@
+{
+  "address": "0xFa85888d6B6e5276E1C6749CAeE6E7719f8c704b",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "success",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "VerificationResult",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "getUserStats",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "successful",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "successRate",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getVerificationStats",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "successful",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "successRate",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "successfulVerifications",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalVerifications",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "userSuccessfulVerifications",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "userVerifications",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "X",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "Y",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct Pairing.G1Point",
+              "name": "a",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256[2]",
+                  "name": "X",
+                  "type": "uint256[2]"
+                },
+                {
+                  "internalType": "uint256[2]",
+                  "name": "Y",
+                  "type": "uint256[2]"
+                }
+              ],
+              "internalType": "struct Pairing.G2Point",
+              "name": "b",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "X",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "Y",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct Pairing.G1Point",
+              "name": "c",
+              "type": "tuple"
+            }
+          ],
+          "internalType": "struct Verifier.Proof",
+          "name": "proof",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256[2]",
+          "name": "input",
+          "type": "uint256[2]"
+        }
+      ],
+      "name": "verifyTx",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "r",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x0ffe4c7086ad402329da66253867fd38de6ce40ffe3ab21d95fbeffde36d404c",
+  "receipt": {
+    "to": null,
+    "from": "0x28ED5194D3C7F5fEeb49beccbf4Cfc42623ab1b5",
+    "contractAddress": "0xFa85888d6B6e5276E1C6749CAeE6E7719f8c704b",
+    "transactionIndex": 0,
+    "gasUsed": "1044961",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x5028b8a78950176b40de83e34dfe62ddda2a03687de4bdc4931353fe5e4cfb56",
+    "transactionHash": "0x0ffe4c7086ad402329da66253867fd38de6ce40ffe3ab21d95fbeffde36d404c",
+    "logs": [],
+    "blockNumber": 5720817,
+    "cumulativeGasUsed": "1044961",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 2,
+  "solcInputHash": "68de2ea3a7fba4c7b122750c33619048",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"success\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"VerificationResult\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"getUserStats\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"successful\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"successRate\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getVerificationStats\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"successful\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"successRate\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"successfulVerifications\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalVerifications\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"userSuccessfulVerifications\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"userVerifications\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"X\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"Y\",\"type\":\"uint256\"}],\"internalType\":\"struct Pairing.G1Point\",\"name\":\"a\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"uint256[2]\",\"name\":\"X\",\"type\":\"uint256[2]\"},{\"internalType\":\"uint256[2]\",\"name\":\"Y\",\"type\":\"uint256[2]\"}],\"internalType\":\"struct Pairing.G2Point\",\"name\":\"b\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"X\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"Y\",\"type\":\"uint256\"}],\"internalType\":\"struct Pairing.G1Point\",\"name\":\"c\",\"type\":\"tuple\"}],\"internalType\":\"struct Verifier.Proof\",\"name\":\"proof\",\"type\":\"tuple\"},{\"internalType\":\"uint256[2]\",\"name\":\"input\",\"type\":\"uint256[2]\"}],\"name\":\"verifyTx\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"r\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"This contract verifies zero-knowledge proofs for weather data and maintains verification statistics\",\"kind\":\"dev\",\"methods\":{\"getUserStats(address)\":{\"params\":{\"user\":\"The user address to query\"},\"returns\":{\"successRate\":\"Success rate as percentage (scaled by 100)\",\"successful\":\"Number of successful verifications by the user\",\"total\":\"Total number of verifications by the user\"}},\"getVerificationStats()\":{\"returns\":{\"successRate\":\"Success rate as percentage (scaled by 100)\",\"successful\":\"Number of successful verifications\",\"total\":\"Total number of verifications\"}},\"verifyTx(((uint256,uint256),(uint256[2],uint256[2]),(uint256,uint256)),uint256[2])\":{\"params\":{\"input\":\"The public inputs for the proof\",\"proof\":\"The ZK-SNARK proof to verify\"},\"returns\":{\"r\":\"True if the proof is valid, false otherwise\"}}},\"title\":\"Verifier\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"getUserStats(address)\":{\"notice\":\"Get verification statistics for a specific user\"},\"getVerificationStats()\":{\"notice\":\"Get global verification statistics\"},\"verifyTx(((uint256,uint256),(uint256[2],uint256[2]),(uint256,uint256)),uint256[2])\":{\"notice\":\"Verify a ZK-SNARK proof and update statistics\"}},\"notice\":\"ZK-SNARK verifier contract for weather insurance proofs\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Verifier.sol\":\"Verifier\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/Verifier.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// This file is MIT Licensed.\\n//\\n// Copyright 2017 Christian Reitwiessner\\n// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \\\"Software\\\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\\n// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\\n// THE SOFTWARE IS PROVIDED \\\"AS IS\\\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\\n\\npragma solidity ^0.8.0;\\n\\nlibrary Pairing {\\n    struct G1Point {\\n        uint X;\\n        uint Y;\\n    }\\n    // Encoding of field elements is: X[0] * z + X[1]\\n    struct G2Point {\\n        uint[2] X;\\n        uint[2] Y;\\n    }\\n    /// @return the generator of G1\\n    function P1() pure internal returns (G1Point memory) {\\n        return G1Point(1, 2);\\n    }\\n    /// @return the generator of G2\\n    function P2() pure internal returns (G2Point memory) {\\n        return G2Point(\\n            [10857046999023057135944570762232829481370756359578518086990519993285655852781,\\n             11559732032986387107991004021392285783925812861821192530917403151452391805634],\\n            [8495653923123431417604973247489272438418190587263600148770280649306958101930,\\n             4082367875863433681332203403145435568316851327593401208105741076214120093531]\\n        );\\n    }\\n    /// @return the negation of p, i.e. p.addition(p.negate()) should be zero.\\n    function negate(G1Point memory p) pure internal returns (G1Point memory) {\\n        // The prime q in the base field F_q for G1\\n        uint q = 21888242871839275222246405745257275088696311157297823662689037894645226208583;\\n        if (p.X == 0 && p.Y == 0)\\n            return G1Point(0, 0);\\n        return G1Point(p.X, q - (p.Y % q));\\n    }\\n    /// @return r the sum of two points of G1\\n    function addition(G1Point memory p1, G1Point memory p2) internal view returns (G1Point memory r) {\\n        uint[4] memory input;\\n        input[0] = p1.X;\\n        input[1] = p1.Y;\\n        input[2] = p2.X;\\n        input[3] = p2.Y;\\n        bool success;\\n        assembly {\\n            success := staticcall(sub(gas(), 2000), 6, input, 0xc0, r, 0x60)\\n            // Use \\\"invalid\\\" to make gas estimation work\\n            switch success case 0 { invalid() }\\n        }\\n        require(success);\\n    }\\n\\n    /// @return r the product of a point on G1 and a scalar, i.e.\\n    /// p == p.scalar_mul(1) and p.addition(p) == p.scalar_mul(2) for all points p.\\n    function scalar_mul(G1Point memory p, uint s) internal view returns (G1Point memory r) {\\n        uint[3] memory input;\\n        input[0] = p.X;\\n        input[1] = p.Y;\\n        input[2] = s;\\n        bool success;\\n        assembly {\\n            success := staticcall(sub(gas(), 2000), 7, input, 0x80, r, 0x60)\\n            // Use \\\"invalid\\\" to make gas estimation work\\n            switch success case 0 { invalid() }\\n        }\\n        require (success);\\n    }\\n    /// @return the result of computing the pairing check\\n    /// e(p1[0], p2[0]) *  .... * e(p1[n], p2[n]) == 1\\n    /// For example pairing([P1(), P1().negate()], [P2(), P2()]) should\\n    /// return true.\\n    function pairing(G1Point[] memory p1, G2Point[] memory p2) internal view returns (bool) {\\n        require(p1.length == p2.length);\\n        uint elements = p1.length;\\n        uint inputSize = elements * 6;\\n        uint[] memory input = new uint[](inputSize);\\n        for (uint i = 0; i < elements; i++)\\n        {\\n            input[i * 6 + 0] = p1[i].X;\\n            input[i * 6 + 1] = p1[i].Y;\\n            input[i * 6 + 2] = p2[i].X[1];\\n            input[i * 6 + 3] = p2[i].X[0];\\n            input[i * 6 + 4] = p2[i].Y[1];\\n            input[i * 6 + 5] = p2[i].Y[0];\\n        }\\n        uint[1] memory out;\\n        bool success;\\n        assembly {\\n            success := staticcall(sub(gas(), 2000), 8, add(input, 0x20), mul(inputSize, 0x20), out, 0x20)\\n            // Use \\\"invalid\\\" to make gas estimation work\\n            switch success case 0 { invalid() }\\n        }\\n        require(success);\\n        return out[0] != 0;\\n    }\\n    /// Convenience method for a pairing check for two pairs.\\n    function pairingProd2(G1Point memory a1, G2Point memory a2, G1Point memory b1, G2Point memory b2) internal view returns (bool) {\\n        G1Point[] memory p1 = new G1Point[](2);\\n        G2Point[] memory p2 = new G2Point[](2);\\n        p1[0] = a1;\\n        p1[1] = b1;\\n        p2[0] = a2;\\n        p2[1] = b2;\\n        return pairing(p1, p2);\\n    }\\n    /// Convenience method for a pairing check for three pairs.\\n    function pairingProd3(\\n            G1Point memory a1, G2Point memory a2,\\n            G1Point memory b1, G2Point memory b2,\\n            G1Point memory c1, G2Point memory c2\\n    ) internal view returns (bool) {\\n        G1Point[] memory p1 = new G1Point[](3);\\n        G2Point[] memory p2 = new G2Point[](3);\\n        p1[0] = a1;\\n        p1[1] = b1;\\n        p1[2] = c1;\\n        p2[0] = a2;\\n        p2[1] = b2;\\n        p2[2] = c2;\\n        return pairing(p1, p2);\\n    }\\n    /// Convenience method for a pairing check for four pairs.\\n    function pairingProd4(\\n            G1Point memory a1, G2Point memory a2,\\n            G1Point memory b1, G2Point memory b2,\\n            G1Point memory c1, G2Point memory c2,\\n            G1Point memory d1, G2Point memory d2\\n    ) internal view returns (bool) {\\n        G1Point[] memory p1 = new G1Point[](4);\\n        G2Point[] memory p2 = new G2Point[](4);\\n        p1[0] = a1;\\n        p1[1] = b1;\\n        p1[2] = c1;\\n        p1[3] = d1;\\n        p2[0] = a2;\\n        p2[1] = b2;\\n        p2[2] = c2;\\n        p2[3] = d2;\\n        return pairing(p1, p2);\\n    }\\n}\\n\\n/**\\n * @title Verifier\\n * @notice ZK-SNARK verifier contract for weather insurance proofs\\n * @dev This contract verifies zero-knowledge proofs for weather data and maintains verification statistics\\n */\\ncontract Verifier {\\n    using Pairing for *;\\n    \\n    // State variables for tracking verification statistics\\n    uint256 public totalVerifications;\\n    uint256 public successfulVerifications;\\n    mapping(address => uint256) public userVerifications;\\n    mapping(address => uint256) public userSuccessfulVerifications;\\n    \\n    // Events for logging verification results\\n    event VerificationResult(address indexed user, bool success, uint256 timestamp);\\n    \\n    struct VerifyingKey {\\n        Pairing.G1Point alpha;\\n        Pairing.G2Point beta;\\n        Pairing.G2Point gamma;\\n        Pairing.G2Point delta;\\n        Pairing.G1Point[] gamma_abc;\\n    }\\n    \\n    struct Proof {\\n        Pairing.G1Point a;\\n        Pairing.G2Point b;\\n        Pairing.G1Point c;\\n    }\\n    \\n    function verifyingKey() pure internal returns (VerifyingKey memory vk) {\\n        vk.alpha = Pairing.G1Point(uint256(0x1678fa7b085231748882a55d733142122a721ea6ec6c6a94070b8212ebe06a99), uint256(0x20561cb36370d8c4282ec11930026beadb186ce15a3d0d4d0c9a3ac9cc573984));\\n        vk.beta = Pairing.G2Point([uint256(0x1b4f06a02c9837bc9d778028c697c1924f0d385408013d152537d67a6a3d5618), uint256(0x122801438bc82ec3d1f5ebc9423044d49893c1accffc9a40f386fbd775b49b19)], [uint256(0x09854d25447a9aafc4edca09769288cfb419c63d875ad4c6b5f253f1e56a53a0), uint256(0x2d5b4f27bf72b909f4f508407f9792171c42ff7b9fe539dada5c13ec8f2f1813)]);\\n        vk.gamma = Pairing.G2Point([uint256(0x23051bdc6e14ac07365384e240ae3ee66beb3ccaf388e6a140a3ab0c904155e2), uint256(0x08d1c8a326b4a0a305cbb9699f39d0e54e136619d3c7a701f458a821d1853b38)], [uint256(0x12ffb907f380ae8edd87e9145d6642d5b3af5cad367f5afc084232adec0d9d8e), uint256(0x2d0871fd0092e90cbd11e4ed92a45d3adbffb34834b617ccbdbad69cfe777298)]);\\n        vk.delta = Pairing.G2Point([uint256(0x237d4bce807566463ae21438f5e4642e914eb3b4697c4ba4d1f26d204de2b914), uint256(0x048acfcb60c1ec6c6038cddd20402666784507d2bdce1c834df3c1e19ab7d3ae)], [uint256(0x07168b0b959d1f9c62e78be2e316b70ba3bdc53466225f0b3edfa09c3c131b28), uint256(0x014bb91c0d8c118b351df2279d5a2a8d6deadfd061624886225d4e1ba1162159)]);\\n        vk.gamma_abc = new Pairing.G1Point[](3);\\n        vk.gamma_abc[0] = Pairing.G1Point(uint256(0x02b617d57ec690c65b059460f5572ffca651a547978ea67540f373c980026d39), uint256(0x094d18d3e519bbc9447a9ceb23558ce5bd11fed16c5aa8dbf1d169c3f3ab9a96));\\n        vk.gamma_abc[1] = Pairing.G1Point(uint256(0x2c96125a772b6f1edaa4830889bb3749d7d863545c360c0e989352d26f0a38eb), uint256(0x1c883e5cf271aea60f52a70559d2b80201c2a98aa0042f6d55c2b3e5dedee7fb));\\n        vk.gamma_abc[2] = Pairing.G1Point(uint256(0x0318843f4d13dc0d59eae43c5e63ff8a4cfff5ddfc83ceadef4495b5cb146256), uint256(0x08566e7e735a8f9e69d1a72d4940ea46917baba1abd7162faca278090a16cd9a));\\n    }\\n    \\n    function verify(uint[] memory input, Proof memory proof) internal view returns (uint) {\\n        uint256 snark_scalar_field = 21888242871839275222246405745257275088548364400416034343698204186575808495617;\\n        VerifyingKey memory vk = verifyingKey();\\n        require(input.length + 1 == vk.gamma_abc.length);\\n        // Compute the linear combination vk_x\\n        Pairing.G1Point memory vk_x = Pairing.G1Point(0, 0);\\n        for (uint i = 0; i < input.length; i++) {\\n            require(input[i] < snark_scalar_field);\\n            vk_x = Pairing.addition(vk_x, Pairing.scalar_mul(vk.gamma_abc[i + 1], input[i]));\\n        }\\n        vk_x = Pairing.addition(vk_x, vk.gamma_abc[0]);\\n        if(!Pairing.pairingProd4(\\n             proof.a, proof.b,\\n             Pairing.negate(vk_x), vk.gamma,\\n             Pairing.negate(proof.c), vk.delta,\\n             Pairing.negate(vk.alpha), vk.beta)) return 1;\\n        return 0;\\n    }\\n    \\n    /**\\n     * @notice Verify a ZK-SNARK proof and update statistics\\n     * @param proof The ZK-SNARK proof to verify\\n     * @param input The public inputs for the proof\\n     * @return r True if the proof is valid, false otherwise\\n     */\\n    function verifyTx(Proof memory proof, uint[2] memory input) public returns (bool r) {\\n        uint[] memory inputValues = new uint[](2);\\n        \\n        for(uint i = 0; i < input.length; i++){\\n            inputValues[i] = input[i];\\n        }\\n        \\n        // Perform verification\\n        bool isValid = verify(inputValues, proof) == 0;\\n        \\n        // Update statistics\\n        totalVerifications++;\\n        userVerifications[msg.sender]++;\\n        \\n        if (isValid) {\\n            successfulVerifications++;\\n            userSuccessfulVerifications[msg.sender]++;\\n        }\\n        \\n        // Emit event\\n        emit VerificationResult(msg.sender, isValid, block.timestamp);\\n        \\n        return isValid;\\n    }\\n    \\n    /**\\n     * @notice Get global verification statistics\\n     * @return total Total number of verifications\\n     * @return successful Number of successful verifications\\n     * @return successRate Success rate as percentage (scaled by 100)\\n     */\\n    function getVerificationStats() public view returns (uint256 total, uint256 successful, uint256 successRate) {\\n        total = totalVerifications;\\n        successful = successfulVerifications;\\n        successRate = total > 0 ? (successful * 10000) / total : 0; // Scaled by 100 for percentage\\n    }\\n    \\n    /**\\n     * @notice Get verification statistics for a specific user\\n     * @param user The user address to query\\n     * @return total Total number of verifications by the user\\n     * @return successful Number of successful verifications by the user\\n     * @return successRate Success rate as percentage (scaled by 100)\\n     */\\n    function getUserStats(address user) public view returns (uint256 total, uint256 successful, uint256 successRate) {\\n        total = userVerifications[user];\\n        successful = userSuccessfulVerifications[user];\\n        successRate = total > 0 ? (successful * 10000) / total : 0; // Scaled by 100 for percentage\\n    }\\n}\\n\",\"keccak256\":\"0xed0ad2a937c0f4c7b97c5817ee5a22880f05636f4895220e88e52513451888e0\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506111ee806100206000396000f3fe608060405234801561001057600080fd5b506004361061007d5760003560e01c8063ac90c1401161005b578063ac90c14014610106578063ae864daa1461010f578063d6abcdc114610118578063efcf6a8d1461013857600080fd5b806343cd76fc1461008257806346616268146100aa5780634e43603a146100d8575b600080fd5b610095610090366004611003565b610140565b60405190151581526020015b60405180910390f35b6100ca6100b83660046110c8565b60026020526000908152604090205481565b6040519081526020016100a1565b6100eb6100e63660046110c8565b61027d565b604080519384526020840192909252908201526060016100a1565b6100ca60005481565b6100ca60015481565b6100ca6101263660046110c8565b60036020526000908152604090205481565b6100eb6102ce565b6040805160028082526060820183526000928392919060208301908036833701905050905060005b60028110156101b757838160028110610183576101836110f8565b602002015182828151811061019a5761019a6110f8565b6020908102919091010152806101af81611124565b915050610168565b5060006101c48286610301565b6000805491159250806101d683611124565b90915550503360009081526002602052604081208054916101f683611124565b91905055508015610237576001805490600061021183611124565b909155505033600090815260036020526040812080549161023183611124565b91905055505b60408051821515815242602082015233917ff80841247bcbfb8807b11a50ecceabccd092963d2280ca954efa85a5c4ad4270910160405180910390a29150505b92915050565b6001600160a01b03811660009081526002602090815260408083205460039092528220549091826102af5760006102c6565b826102bc8361271061113d565b6102c6919061116a565b929491935050565b600080546001549091826102e35760006102fa565b826102f08361271061113d565b6102fa919061116a565b9050909192565b60007f30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f00000018161032d610484565b905080608001515185516001610343919061117e565b1461034d57600080fd5b604080518082019091526000808252602082018190525b86518110156103fb5783878281518110610380576103806110f8565b60200260200101511061039257600080fd5b6103e7826103e285608001518460016103ab919061117e565b815181106103bb576103bb6110f8565b60200260200101518a85815181106103d5576103d56110f8565b6020026020010151610897565b6108f5565b9150806103f381611124565b915050610364565b50610424818360800151600081518110610417576104176110f8565b60200260200101516108f5565b90506104688560000151866020015161043c8461094b565b856040015161044e8a6040015161094b565b6060880151885161045e9061094b565b89602001516109ea565b6104785760019350505050610277565b50600095945050505050565b61048c610e56565b6040805180820182527f1678fa7b085231748882a55d733142122a721ea6ec6c6a94070b8212ebe06a9981527f20561cb36370d8c4282ec11930026beadb186ce15a3d0d4d0c9a3ac9cc5739846020808301919091529083528151608080820184527f1b4f06a02c9837bc9d778028c697c1924f0d385408013d152537d67a6a3d56188285019081527f122801438bc82ec3d1f5ebc9423044d49893c1accffc9a40f386fbd775b49b19606080850191909152908352845180860186527f09854d25447a9aafc4edca09769288cfb419c63d875ad4c6b5f253f1e56a53a081527f2d5b4f27bf72b909f4f508407f9792171c42ff7b9fe539dada5c13ec8f2f1813818601528385015285840192909252835180820185527f23051bdc6e14ac07365384e240ae3ee66beb3ccaf388e6a140a3ab0c904155e28186019081527f08d1c8a326b4a0a305cbb9699f39d0e54e136619d3c7a701f458a821d1853b38828501528152845180860186527f12ffb907f380ae8edd87e9145d6642d5b3af5cad367f5afc084232adec0d9d8e81527f2d0871fd0092e90cbd11e4ed92a45d3adbffb34834b617ccbdbad69cfe777298818601528185015285850152835180820185527f237d4bce807566463ae21438f5e4642e914eb3b4697c4ba4d1f26d204de2b9148186019081527f048acfcb60c1ec6c6038cddd20402666784507d2bdce1c834df3c1e19ab7d3ae828501528152845180860186527f07168b0b959d1f9c62e78be2e316b70ba3bdc53466225f0b3edfa09c3c131b2881527f014bb91c0d8c118b351df2279d5a2a8d6deadfd061624886225d4e1ba1162159818601528185015291850191909152825160038082529181019093529082015b604080518082019091526000808252602082015281526020019060019003908161070857505060808201908152604080518082019091527f02b617d57ec690c65b059460f5572ffca651a547978ea67540f373c980026d3981527f094d18d3e519bbc9447a9ceb23558ce5bd11fed16c5aa8dbf1d169c3f3ab9a9660208201529051805160009061079b5761079b6110f8565b602002602001018190525060405180604001604052807f2c96125a772b6f1edaa4830889bb3749d7d863545c360c0e989352d26f0a38eb81526020017f1c883e5cf271aea60f52a70559d2b80201c2a98aa0042f6d55c2b3e5dedee7fb8152508160800151600181518110610812576108126110f8565b602002602001018190525060405180604001604052807f0318843f4d13dc0d59eae43c5e63ff8a4cfff5ddfc83ceadef4495b5cb14625681526020017f08566e7e735a8f9e69d1a72d4940ea46917baba1abd7162faca278090a16cd9a8152508160800151600281518110610889576108896110f8565b602002602001018190525090565b60408051808201909152600080825260208201526108b3610ea7565b835181526020808501519082015260408101839052600060608360808460076107d05a03fa905080806108e257fe5b50806108ed57600080fd5b505092915050565b6040805180820190915260008082526020820152610911610ec5565b8351815260208085015181830152835160408301528301516060808301919091526000908360c08460066107d05a03fa905080806108e257fe5b604080518082019091526000808252602082015281517f30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd479015801561099257506020830151155b156109b25750506040805180820190915260008082526020820152919050565b6040518060400160405280846000015181526020018285602001516109d79190611191565b6109e190846111a5565b90529392505050565b60408051600480825260a08201909252600091829190816020015b6040805180820190915260008082526020820152815260200190600190039081610a0557505060408051600480825260a0820190925291925060009190602082015b610a4f610ee3565b815260200190600190039081610a475790505090508a82600081518110610a7857610a786110f8565b60200260200101819052508882600181518110610a9757610a976110f8565b60200260200101819052508682600281518110610ab657610ab66110f8565b60200260200101819052508482600381518110610ad557610ad56110f8565b60200260200101819052508981600081518110610af457610af46110f8565b60200260200101819052508781600181518110610b1357610b136110f8565b60200260200101819052508581600281518110610b3257610b326110f8565b60200260200101819052508381600381518110610b5157610b516110f8565b6020026020010181905250610b668282610b75565b9b9a5050505050505050505050565b60008151835114610b8557600080fd5b82516000610b9482600661113d565b905060008167ffffffffffffffff811115610bb157610bb1610f44565b604051908082528060200260200182016040528015610bda578160200160208202803683370190505b50905060005b83811015610e1557868181518110610bfa57610bfa6110f8565b60200260200101516000015182826006610c14919061113d565b610c1f90600061117e565b81518110610c2f57610c2f6110f8565b602002602001018181525050868181518110610c4d57610c4d6110f8565b60200260200101516020015182826006610c67919061113d565b610c7290600161117e565b81518110610c8257610c826110f8565b602002602001018181525050858181518110610ca057610ca06110f8565b60209081029190910181015151015182610cbb83600661113d565b610cc690600261117e565b81518110610cd657610cd66110f8565b602002602001018181525050858181518110610cf457610cf46110f8565b6020908102919091010151515182610d0d83600661113d565b610d1890600361117e565b81518110610d2857610d286110f8565b602002602001018181525050858181518110610d4657610d466110f8565b602002602001015160200151600160028110610d6457610d646110f8565b602002015182610d7583600661113d565b610d8090600461117e565b81518110610d9057610d906110f8565b602002602001018181525050858181518110610dae57610dae6110f8565b602002602001015160200151600060028110610dcc57610dcc6110f8565b602002015182610ddd83600661113d565b610de890600561117e565b81518110610df857610df86110f8565b602090810291909101015280610e0d81611124565b915050610be0565b50610e1e610f08565b6000602082602086026020860160086107d05a03fa90508080610e3d57fe5b5080610e4857600080fd5b505115159695505050505050565b6040805160e08101909152600060a0820181815260c0830191909152815260208101610e80610ee3565b8152602001610e8d610ee3565b8152602001610e9a610ee3565b8152602001606081525090565b60405180606001604052806003906020820280368337509192915050565b60405180608001604052806004906020820280368337509192915050565b6040518060400160405280610ef6610f26565b8152602001610f03610f26565b905290565b60405180602001604052806001906020820280368337509192915050565b60405180604001604052806002906020820280368337509192915050565b634e487b7160e01b600052604160045260246000fd5b6040805190810167ffffffffffffffff81118282101715610f7d57610f7d610f44565b60405290565b600060408284031215610f9557600080fd5b610f9d610f5a565b9050813581526020820135602082015292915050565b600082601f830112610fc457600080fd5b610fcc610f5a565b806040840185811115610fde57600080fd5b845b81811015610ff8578035845260209384019301610fe0565b509095945050505050565b60008082840361014081121561101857600080fd5b6101008082121561102857600080fd5b6040516060810181811067ffffffffffffffff8211171561104b5761104b610f44565b6040526110588787610f83565b81526080603f198401121561106c57600080fd5b611074610f5a565b92506110838760408801610fb3565b83526110928760808801610fb3565b60208401528260208201526110aa8760c08801610f83565b604082015293506110bd86868301610fb3565b925050509250929050565b6000602082840312156110da57600080fd5b81356001600160a01b03811681146110f157600080fd5b9392505050565b634e487b7160e01b600052603260045260246000fd5b634e487b7160e01b600052601160045260246000fd5b6000600182016111365761113661110e565b5060010190565b80820281158282048414176102775761027761110e565b634e487b7160e01b600052601260045260246000fd5b60008261117957611179611154565b500490565b808201808211156102775761027761110e565b6000826111a0576111a0611154565b500690565b818103818111156102775761027761110e56fea264697066735822122077be49f26ac1679c62b26a96cdb189aefd34e7e4ebbcb985fc49c6ae5ffe0cd964736f6c63430008140033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061007d5760003560e01c8063ac90c1401161005b578063ac90c14014610106578063ae864daa1461010f578063d6abcdc114610118578063efcf6a8d1461013857600080fd5b806343cd76fc1461008257806346616268146100aa5780634e43603a146100d8575b600080fd5b610095610090366004611003565b610140565b60405190151581526020015b60405180910390f35b6100ca6100b83660046110c8565b60026020526000908152604090205481565b6040519081526020016100a1565b6100eb6100e63660046110c8565b61027d565b604080519384526020840192909252908201526060016100a1565b6100ca60005481565b6100ca60015481565b6100ca6101263660046110c8565b60036020526000908152604090205481565b6100eb6102ce565b6040805160028082526060820183526000928392919060208301908036833701905050905060005b60028110156101b757838160028110610183576101836110f8565b602002015182828151811061019a5761019a6110f8565b6020908102919091010152806101af81611124565b915050610168565b5060006101c48286610301565b6000805491159250806101d683611124565b90915550503360009081526002602052604081208054916101f683611124565b91905055508015610237576001805490600061021183611124565b909155505033600090815260036020526040812080549161023183611124565b91905055505b60408051821515815242602082015233917ff80841247bcbfb8807b11a50ecceabccd092963d2280ca954efa85a5c4ad4270910160405180910390a29150505b92915050565b6001600160a01b03811660009081526002602090815260408083205460039092528220549091826102af5760006102c6565b826102bc8361271061113d565b6102c6919061116a565b929491935050565b600080546001549091826102e35760006102fa565b826102f08361271061113d565b6102fa919061116a565b9050909192565b60007f30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f00000018161032d610484565b905080608001515185516001610343919061117e565b1461034d57600080fd5b604080518082019091526000808252602082018190525b86518110156103fb5783878281518110610380576103806110f8565b60200260200101511061039257600080fd5b6103e7826103e285608001518460016103ab919061117e565b815181106103bb576103bb6110f8565b60200260200101518a85815181106103d5576103d56110f8565b6020026020010151610897565b6108f5565b9150806103f381611124565b915050610364565b50610424818360800151600081518110610417576104176110f8565b60200260200101516108f5565b90506104688560000151866020015161043c8461094b565b856040015161044e8a6040015161094b565b6060880151885161045e9061094b565b89602001516109ea565b6104785760019350505050610277565b50600095945050505050565b61048c610e56565b6040805180820182527f1678fa7b085231748882a55d733142122a721ea6ec6c6a94070b8212ebe06a9981527f20561cb36370d8c4282ec11930026beadb186ce15a3d0d4d0c9a3ac9cc5739846020808301919091529083528151608080820184527f1b4f06a02c9837bc9d778028c697c1924f0d385408013d152537d67a6a3d56188285019081527f122801438bc82ec3d1f5ebc9423044d49893c1accffc9a40f386fbd775b49b19606080850191909152908352845180860186527f09854d25447a9aafc4edca09769288cfb419c63d875ad4c6b5f253f1e56a53a081527f2d5b4f27bf72b909f4f508407f9792171c42ff7b9fe539dada5c13ec8f2f1813818601528385015285840192909252835180820185527f23051bdc6e14ac07365384e240ae3ee66beb3ccaf388e6a140a3ab0c904155e28186019081527f08d1c8a326b4a0a305cbb9699f39d0e54e136619d3c7a701f458a821d1853b38828501528152845180860186527f12ffb907f380ae8edd87e9145d6642d5b3af5cad367f5afc084232adec0d9d8e81527f2d0871fd0092e90cbd11e4ed92a45d3adbffb34834b617ccbdbad69cfe777298818601528185015285850152835180820185527f237d4bce807566463ae21438f5e4642e914eb3b4697c4ba4d1f26d204de2b9148186019081527f048acfcb60c1ec6c6038cddd20402666784507d2bdce1c834df3c1e19ab7d3ae828501528152845180860186527f07168b0b959d1f9c62e78be2e316b70ba3bdc53466225f0b3edfa09c3c131b2881527f014bb91c0d8c118b351df2279d5a2a8d6deadfd061624886225d4e1ba1162159818601528185015291850191909152825160038082529181019093529082015b604080518082019091526000808252602082015281526020019060019003908161070857505060808201908152604080518082019091527f02b617d57ec690c65b059460f5572ffca651a547978ea67540f373c980026d3981527f094d18d3e519bbc9447a9ceb23558ce5bd11fed16c5aa8dbf1d169c3f3ab9a9660208201529051805160009061079b5761079b6110f8565b602002602001018190525060405180604001604052807f2c96125a772b6f1edaa4830889bb3749d7d863545c360c0e989352d26f0a38eb81526020017f1c883e5cf271aea60f52a70559d2b80201c2a98aa0042f6d55c2b3e5dedee7fb8152508160800151600181518110610812576108126110f8565b602002602001018190525060405180604001604052807f0318843f4d13dc0d59eae43c5e63ff8a4cfff5ddfc83ceadef4495b5cb14625681526020017f08566e7e735a8f9e69d1a72d4940ea46917baba1abd7162faca278090a16cd9a8152508160800151600281518110610889576108896110f8565b602002602001018190525090565b60408051808201909152600080825260208201526108b3610ea7565b835181526020808501519082015260408101839052600060608360808460076107d05a03fa905080806108e257fe5b50806108ed57600080fd5b505092915050565b6040805180820190915260008082526020820152610911610ec5565b8351815260208085015181830152835160408301528301516060808301919091526000908360c08460066107d05a03fa905080806108e257fe5b604080518082019091526000808252602082015281517f30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd479015801561099257506020830151155b156109b25750506040805180820190915260008082526020820152919050565b6040518060400160405280846000015181526020018285602001516109d79190611191565b6109e190846111a5565b90529392505050565b60408051600480825260a08201909252600091829190816020015b6040805180820190915260008082526020820152815260200190600190039081610a0557505060408051600480825260a0820190925291925060009190602082015b610a4f610ee3565b815260200190600190039081610a475790505090508a82600081518110610a7857610a786110f8565b60200260200101819052508882600181518110610a9757610a976110f8565b60200260200101819052508682600281518110610ab657610ab66110f8565b60200260200101819052508482600381518110610ad557610ad56110f8565b60200260200101819052508981600081518110610af457610af46110f8565b60200260200101819052508781600181518110610b1357610b136110f8565b60200260200101819052508581600281518110610b3257610b326110f8565b60200260200101819052508381600381518110610b5157610b516110f8565b6020026020010181905250610b668282610b75565b9b9a5050505050505050505050565b60008151835114610b8557600080fd5b82516000610b9482600661113d565b905060008167ffffffffffffffff811115610bb157610bb1610f44565b604051908082528060200260200182016040528015610bda578160200160208202803683370190505b50905060005b83811015610e1557868181518110610bfa57610bfa6110f8565b60200260200101516000015182826006610c14919061113d565b610c1f90600061117e565b81518110610c2f57610c2f6110f8565b602002602001018181525050868181518110610c4d57610c4d6110f8565b60200260200101516020015182826006610c67919061113d565b610c7290600161117e565b81518110610c8257610c826110f8565b602002602001018181525050858181518110610ca057610ca06110f8565b60209081029190910181015151015182610cbb83600661113d565b610cc690600261117e565b81518110610cd657610cd66110f8565b602002602001018181525050858181518110610cf457610cf46110f8565b6020908102919091010151515182610d0d83600661113d565b610d1890600361117e565b81518110610d2857610d286110f8565b602002602001018181525050858181518110610d4657610d466110f8565b602002602001015160200151600160028110610d6457610d646110f8565b602002015182610d7583600661113d565b610d8090600461117e565b81518110610d9057610d906110f8565b602002602001018181525050858181518110610dae57610dae6110f8565b602002602001015160200151600060028110610dcc57610dcc6110f8565b602002015182610ddd83600661113d565b610de890600561117e565b81518110610df857610df86110f8565b602090810291909101015280610e0d81611124565b915050610be0565b50610e1e610f08565b6000602082602086026020860160086107d05a03fa90508080610e3d57fe5b5080610e4857600080fd5b505115159695505050505050565b6040805160e08101909152600060a0820181815260c0830191909152815260208101610e80610ee3565b8152602001610e8d610ee3565b8152602001610e9a610ee3565b8152602001606081525090565b60405180606001604052806003906020820280368337509192915050565b60405180608001604052806004906020820280368337509192915050565b6040518060400160405280610ef6610f26565b8152602001610f03610f26565b905290565b60405180602001604052806001906020820280368337509192915050565b60405180604001604052806002906020820280368337509192915050565b634e487b7160e01b600052604160045260246000fd5b6040805190810167ffffffffffffffff81118282101715610f7d57610f7d610f44565b60405290565b600060408284031215610f9557600080fd5b610f9d610f5a565b9050813581526020820135602082015292915050565b600082601f830112610fc457600080fd5b610fcc610f5a565b806040840185811115610fde57600080fd5b845b81811015610ff8578035845260209384019301610fe0565b509095945050505050565b60008082840361014081121561101857600080fd5b6101008082121561102857600080fd5b6040516060810181811067ffffffffffffffff8211171561104b5761104b610f44565b6040526110588787610f83565b81526080603f198401121561106c57600080fd5b611074610f5a565b92506110838760408801610fb3565b83526110928760808801610fb3565b60208401528260208201526110aa8760c08801610f83565b604082015293506110bd86868301610fb3565b925050509250929050565b6000602082840312156110da57600080fd5b81356001600160a01b03811681146110f157600080fd5b9392505050565b634e487b7160e01b600052603260045260246000fd5b634e487b7160e01b600052601160045260246000fd5b6000600182016111365761113661110e565b5060010190565b80820281158282048414176102775761027761110e565b634e487b7160e01b600052601260045260246000fd5b60008261117957611179611154565b500490565b808201808211156102775761027761110e565b6000826111a0576111a0611154565b500690565b818103818111156102775761027761110e56fea264697066735822122077be49f26ac1679c62b26a96cdb189aefd34e7e4ebbcb985fc49c6ae5ffe0cd964736f6c63430008140033",
+  "devdoc": {
+    "details": "This contract verifies zero-knowledge proofs for weather data and maintains verification statistics",
+    "kind": "dev",
+    "methods": {
+      "getUserStats(address)": {
+        "params": {
+          "user": "The user address to query"
+        },
+        "returns": {
+          "successRate": "Success rate as percentage (scaled by 100)",
+          "successful": "Number of successful verifications by the user",
+          "total": "Total number of verifications by the user"
+        }
+      },
+      "getVerificationStats()": {
+        "returns": {
+          "successRate": "Success rate as percentage (scaled by 100)",
+          "successful": "Number of successful verifications",
+          "total": "Total number of verifications"
+        }
+      },
+      "verifyTx(((uint256,uint256),(uint256[2],uint256[2]),(uint256,uint256)),uint256[2])": {
+        "params": {
+          "input": "The public inputs for the proof",
+          "proof": "The ZK-SNARK proof to verify"
+        },
+        "returns": {
+          "r": "True if the proof is valid, false otherwise"
+        }
+      }
+    },
+    "title": "Verifier",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "getUserStats(address)": {
+        "notice": "Get verification statistics for a specific user"
+      },
+      "getVerificationStats()": {
+        "notice": "Get global verification statistics"
+      },
+      "verifyTx(((uint256,uint256),(uint256[2],uint256[2]),(uint256,uint256)),uint256[2])": {
+        "notice": "Verify a ZK-SNARK proof and update statistics"
+      }
+    },
+    "notice": "ZK-SNARK verifier contract for weather insurance proofs",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 632,
+        "contract": "contracts/Verifier.sol:Verifier",
+        "label": "totalVerifications",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 634,
+        "contract": "contracts/Verifier.sol:Verifier",
+        "label": "successfulVerifications",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 638,
+        "contract": "contracts/Verifier.sol:Verifier",
+        "label": "userVerifications",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 642,
+        "contract": "contracts/Verifier.sol:Verifier",
+        "label": "userSuccessfulVerifications",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_address,t_uint256)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
