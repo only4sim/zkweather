@@ -35,7 +35,7 @@ This project integrates ZoKrates-based zero-knowledge proofs with Zircuit's high
 
 ## 👥 Team Background
 
-**Quan Li** - Full-stack blockchain developer with expertise in zero-knowledge cryptography and DeFi protocols. Previously worked on privacy-preserving financial applications and has extensive experience with zkSNARKs, smart contract development, and modern web3 frontend architectures.
+**only4sim** - Cryptography researcher. 
 
 ## 🚀 Testing Instructions
 

@@ -58,7 +58,7 @@
 
 - [ ] 2.0 ZK 证明生成系统集成
   - [x] 2.1 设置 ZoKrates 开发环境和依赖项
-  - [ ] 2.2 创建天气模型 ZoKrates 电路 (weather-model.zok)
+  - [x] 2.2 创建天气模型 ZoKrates 电路 (weather-model.zok)
   - [ ] 2.3 实现 ZoKrates 编译和设置工作流
   - [ ] 2.4 开发证明生成 API 端点或客户端功能
   - [ ] 2.5 实现证明生成进度监控和时间指标
