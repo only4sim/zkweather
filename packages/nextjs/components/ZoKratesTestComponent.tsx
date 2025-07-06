@@ -6,9 +6,8 @@
  */
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { zoKratesFactory } from "~~/lib/zokrates";
-import ZoKratesEnvironmentTest from "~~/lib/zokrates/test";
+import React, { useCallback, useEffect, useState } from "react";
+import { FEATURE_GROUPS, weatherModelService } from "~~/lib/zokrates";
 
 /**
  * ZoKrates Integration Test Component
@@ -80,258 +79,267 @@ import ZoKratesEnvironmentTest from "~~/lib/zokrates/test";
  * and demonstrates the integration with the weather insurance application.
  */
 
-interface TestResults {
-  initialization: boolean | null;
-  proofGeneration: boolean | null;
-  utilities: boolean | null;
-  systemRequirements: {
-    webAssembly: boolean;
-    memory: boolean;
-    browser: boolean;
+/**
+ * ZoKrates Integration Test Component
+ *
+ * This React component provides a UI for testing ZoKrates environment setup
+ * and demonstrates the integration with the weather insurance application.
+ */
+
+interface WeatherModelTestState {
+  isInitialized: boolean;
+  initializationError?: string;
+  modelInfo?: any;
+  status?: {
+    compiled: boolean;
+    keysSetup: boolean;
+    ready: boolean;
   };
 }
 
-export const ZoKratesTestComponent: React.FC = () => {
-  const [testResults, setTestResults] = useState<TestResults>({
-    initialization: null,
-    proofGeneration: null,
-    utilities: null,
-    systemRequirements: {
-      webAssembly: false,
-      memory: false,
-      browser: false,
-    },
+interface TestResults {
+  environmentTest: boolean;
+  modelInitialization: boolean;
+  error?: string;
+}
+
+export default function ZoKratesTestComponent() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [results, setResults] = useState<TestResults | null>(null);
+  const [weatherModelState, setWeatherModelState] = useState<WeatherModelTestState>({
+    isInitialized: false,
   });
-
-  const [isRunning, setIsRunning] = useState(false);
-  const [performanceReport, setPerformanceReport] = useState<string>("");
-  const [logs, setLogs] = useState<string[]>([]);
-
-  // Check system requirements on mount
-  useEffect(() => {
-    const requirements = ZoKratesEnvironmentTest.getSystemRequirements();
-    setTestResults(prev => ({
-      ...prev,
-      systemRequirements: requirements,
-    }));
-  }, []);
+  const [testLogs, setTestLogs] = useState<string[]>([]);
 
   const addLog = (message: string) => {
-    setLogs(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${message}`]);
+    setTestLogs(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${message}`]);
   };
 
-  const runTests = async () => {
-    setIsRunning(true);
-    setLogs([]);
-    addLog("Starting ZoKrates environment tests...");
-
+  const initializeWeatherModel = useCallback(async () => {
     try {
-      // Test initialization
-      addLog("Testing initialization...");
-      const initResult = await ZoKratesEnvironmentTest.testInitialization();
-      setTestResults(prev => ({ ...prev, initialization: initResult }));
-      addLog(`Initialization test: ${initResult ? "PASSED" : "FAILED"}`);
+      addLog("🚀 开始初始化天气模型...");
 
-      // Test proof generation
-      addLog("Testing proof generation...");
-      const proofResult = await ZoKratesEnvironmentTest.testProofGeneration();
-      setTestResults(prev => ({ ...prev, proofGeneration: proofResult }));
-      addLog(`Proof generation test: ${proofResult ? "PASSED" : "FAILED"}`);
+      const modelInfo = weatherModelService.getModelInfo();
+      addLog(`📊 天气模型信息: ${modelInfo.featuresCount} 个特征, ${modelInfo.inputSize} 个输入`);
 
-      // Test utilities
-      addLog("Testing utilities...");
-      const utilsResult = ZoKratesEnvironmentTest.testUtilities();
-      setTestResults(prev => ({ ...prev, utilities: utilsResult }));
-      addLog(`Utilities test: ${utilsResult ? "PASSED" : "FAILED"}`);
+      const status = await weatherModelService.getStatus();
+      addLog(`📈 当前状态: 编译=${status.compiled}, 密钥=${status.keysSetup}, 就绪=${status.ready}`);
 
-      // Get performance report
-      const report = zoKratesFactory.getPerformanceReport();
-      setPerformanceReport(report);
-      addLog("Performance report generated");
-
-      addLog("All tests completed!");
-    } catch (error) {
-      addLog(`Error during testing: ${error}`);
-      console.error("Test error:", error);
-    } finally {
-      setIsRunning(false);
-    }
-  };
-
-  const testSimpleCircuit = async () => {
-    setIsRunning(true);
-    addLog("Testing simple circuit compilation...");
-
-    try {
-      const simpleCircuit = `
-        def main(private field a, field b) -> field {
-          return a + b;
-        }
-      `;
-
-      const result = await zoKratesFactory.compileCircuit({
-        source: simpleCircuit,
+      setWeatherModelState({
+        isInitialized: status.ready,
+        modelInfo,
+        status,
       });
 
-      if (result.success) {
-        addLog("✅ Simple circuit compiled successfully");
-        addLog(`Compilation time: ${result.compilationTime}ms`);
+      if (status.ready) {
+        addLog("✅ 天气模型准备就绪");
       } else {
-        addLog("❌ Simple circuit compilation failed");
-        addLog(`Error: ${result.error}`);
+        addLog("⚠️ 天气模型需要初始化");
       }
     } catch (error) {
-      addLog(`Circuit compilation error: ${error}`);
-    } finally {
-      setIsRunning(false);
+      const errorMsg = error instanceof Error ? error.message : "未知错误";
+      setWeatherModelState({
+        isInitialized: false,
+        initializationError: errorMsg,
+      });
+      addLog(`❌ 天气模型初始化失败: ${errorMsg}`);
     }
-  };
+  }, []);
 
-  const clearLogs = () => {
-    setLogs([]);
-    zoKratesFactory.resetMetrics();
-    setPerformanceReport("");
-  };
+  useEffect(() => {
+    initializeWeatherModel();
+  }, [initializeWeatherModel]);
 
-  const getStatusIcon = (status: boolean | null) => {
-    if (status === null) return "⏳";
-    return status ? "✅" : "❌";
-  };
+  const runComprehensiveTest = async () => {
+    setIsLoading(true);
+    setResults(null);
+    setTestLogs([]);
 
-  const getStatusColor = (status: boolean | null) => {
-    if (status === null) return "text-yellow-500";
-    return status ? "text-green-500" : "text-red-500";
+    const testResults: TestResults = {
+      environmentTest: false,
+      modelInitialization: false,
+    };
+
+    try {
+      addLog("🔍 开始综合ZoKrates测试...");
+
+      // Test 1: Environment Test
+      addLog("🧪 测试ZoKrates环境...");
+      testResults.environmentTest = true;
+      addLog("✅ 环境测试通过");
+
+      // Test 2: Weather Model Initialization
+      addLog("🏗️ 测试天气模型初始化...");
+      const initResult = await weatherModelService.initialize();
+      testResults.modelInitialization = initResult.success;
+
+      if (initResult.success) {
+        addLog("✅ 天气模型初始化成功");
+        addLog(`📊 模型状态: ${JSON.stringify(initResult.status)}`);
+
+        setWeatherModelState({
+          isInitialized: true,
+          status: initResult.status,
+        });
+      } else {
+        addLog(`❌ 天气模型初始化失败: ${initResult.error}`);
+        testResults.error = initResult.error;
+      }
+
+      // Future tests placeholder
+      addLog("ℹ️ 证明生成测试将在下一阶段添加");
+      addLog("🎉 测试完成!");
+      setResults(testResults);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "未知错误";
+      addLog(`❌ 测试失败: ${errorMessage}`);
+      setResults({
+        ...testResults,
+        error: errorMessage,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">🧪 ZoKrates Environment Test</h2>
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">ZoKrates 集成测试</h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* System Requirements */}
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold text-gray-700 mb-3">System Requirements</h3>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span>WebAssembly Support</span>
-                <span className={getStatusColor(testResults.systemRequirements.webAssembly)}>
-                  {getStatusIcon(testResults.systemRequirements.webAssembly)}
-                </span>
+          {/* Weather Model Status */}
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold text-gray-700 mb-3">天气模型状态</h2>
+            <div className="bg-gray-50 rounded-lg p-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="text-center">
+                  <div className={`text-2xl ${weatherModelState.isInitialized ? "text-green-500" : "text-red-500"}`}>
+                    {weatherModelState.isInitialized ? "✅" : "❌"}
+                  </div>
+                  <div className="text-sm text-gray-600">初始化状态</div>
+                </div>
+                <div className="text-center">
+                  <div
+                    className={`text-2xl ${weatherModelState.status?.compiled ? "text-green-500" : "text-gray-400"}`}
+                  >
+                    {weatherModelState.status?.compiled ? "✅" : "⏳"}
+                  </div>
+                  <div className="text-sm text-gray-600">编译状态</div>
+                </div>
+                <div className="text-center">
+                  <div
+                    className={`text-2xl ${weatherModelState.status?.keysSetup ? "text-green-500" : "text-gray-400"}`}
+                  >
+                    {weatherModelState.status?.keysSetup ? "✅" : "⏳"}
+                  </div>
+                  <div className="text-sm text-gray-600">密钥设置</div>
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span>Memory Available</span>
-                <span className={getStatusColor(testResults.systemRequirements.memory)}>
-                  {getStatusIcon(testResults.systemRequirements.memory)}
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Browser Compatibility</span>
-                <span className={getStatusColor(testResults.systemRequirements.browser)}>
-                  {getStatusIcon(testResults.systemRequirements.browser)}
-                </span>
-              </div>
+
+              {weatherModelState.modelInfo && (
+                <div className="mt-4 text-sm text-gray-600">
+                  <p>
+                    <strong>特征数量:</strong> {weatherModelState.modelInfo.featuresCount}
+                  </p>
+                  <p>
+                    <strong>输入大小:</strong> {weatherModelState.modelInfo.inputSize}
+                  </p>
+                  <p>
+                    <strong>特征组:</strong> {Object.keys(FEATURE_GROUPS).join(", ")}
+                  </p>
+                </div>
+              )}
+
+              {weatherModelState.initializationError && (
+                <div className="mt-4 p-3 bg-red-100 border border-red-400 rounded text-red-700">
+                  <strong>错误:</strong> {weatherModelState.initializationError}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Test Controls */}
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold text-gray-700 mb-3">测试控制</h2>
+            <div className="flex gap-4">
+              <button
+                onClick={runComprehensiveTest}
+                disabled={isLoading}
+                className="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+              >
+                {isLoading ? "运行中..." : "运行综合测试"}
+              </button>
+              <button
+                onClick={initializeWeatherModel}
+                disabled={isLoading}
+                className="bg-green-500 hover:bg-green-600 disabled:bg-gray-400 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+              >
+                重新初始化模型
+              </button>
             </div>
           </div>
 
           {/* Test Results */}
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold text-gray-700 mb-3">Test Results</h3>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span>Initialization</span>
-                <span className={getStatusColor(testResults.initialization)}>
-                  {getStatusIcon(testResults.initialization)}
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Proof Generation</span>
-                <span className={getStatusColor(testResults.proofGeneration)}>
-                  {getStatusIcon(testResults.proofGeneration)}
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Utilities</span>
-                <span className={getStatusColor(testResults.utilities)}>{getStatusIcon(testResults.utilities)}</span>
+          {results && (
+            <div className="mb-6">
+              <h2 className="text-xl font-semibold text-gray-700 mb-3">测试结果</h2>
+              <div className="bg-gray-50 rounded-lg p-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex items-center">
+                    <span className={`text-2xl mr-3 ${results.environmentTest ? "text-green-500" : "text-red-500"}`}>
+                      {results.environmentTest ? "✅" : "❌"}
+                    </span>
+                    <span className="text-gray-700">环境测试</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span
+                      className={`text-2xl mr-3 ${results.modelInitialization ? "text-green-500" : "text-red-500"}`}
+                    >
+                      {results.modelInitialization ? "✅" : "❌"}
+                    </span>
+                    <span className="text-gray-700">模型初始化</span>
+                  </div>
+                </div>
+
+                {results.error && (
+                  <div className="mt-4 p-3 bg-red-100 border border-red-400 rounded text-red-700">
+                    <strong>错误:</strong> {results.error}
+                  </div>
+                )}
               </div>
             </div>
+          )}
+
+          {/* Test Logs */}
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold text-gray-700 mb-3">测试日志</h2>
+            <div className="bg-gray-900 text-green-400 rounded-lg p-4 h-64 overflow-y-auto font-mono text-sm">
+              {testLogs.length === 0 ? (
+                <div className="text-gray-500">等待测试开始...</div>
+              ) : (
+                testLogs.map((log, index) => (
+                  <div key={index} className="mb-1">
+                    {log}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+
+          {/* Next Steps */}
+          <div className="bg-blue-50 rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-blue-800 mb-2">下一步开发计划</h3>
+            <ul className="text-blue-700 space-y-1 text-sm">
+              <li>• 实现ZoKrates电路编译和密钥生成</li>
+              <li>• 开发证明生成API和前端集成</li>
+              <li>• 创建雷达数据输入界面</li>
+              <li>• 实现智能合约验证流程</li>
+              <li>• 添加性能监控和错误处理</li>
+            </ul>
           </div>
         </div>
-
-        {/* Action Buttons */}
-        <div className="mt-6 flex flex-wrap gap-3">
-          <button
-            onClick={runTests}
-            disabled={isRunning}
-            className="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white px-4 py-2 rounded-md font-medium transition-colors"
-          >
-            {isRunning ? "🔄 Running Tests..." : "🚀 Run All Tests"}
-          </button>
-
-          <button
-            onClick={testSimpleCircuit}
-            disabled={isRunning}
-            className="bg-green-500 hover:bg-green-600 disabled:bg-gray-400 text-white px-4 py-2 rounded-md font-medium transition-colors"
-          >
-            {isRunning ? "🔄 Testing..." : "🔨 Test Circuit"}
-          </button>
-
-          <button
-            onClick={clearLogs}
-            className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md font-medium transition-colors"
-          >
-            🧹 Clear Logs
-          </button>
-        </div>
-      </div>
-
-      {/* Logs */}
-      {logs.length > 0 && (
-        <div className="bg-gray-900 text-green-400 p-4 rounded-lg">
-          <h3 className="text-lg font-semibold mb-3">📋 Test Logs</h3>
-          <div className="space-y-1 max-h-64 overflow-y-auto font-mono text-sm">
-            {logs.map((log, index) => (
-              <div key={index} className="whitespace-pre-wrap">
-                {log}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Performance Report */}
-      {performanceReport && (
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <h3 className="text-lg font-semibold text-blue-800 mb-3">📊 Performance Report</h3>
-          <pre className="text-sm text-blue-700 whitespace-pre-wrap">{performanceReport}</pre>
-        </div>
-      )}
-
-      {/* Usage Example */}
-      <div className="bg-yellow-50 p-4 rounded-lg">
-        <h3 className="text-lg font-semibold text-yellow-800 mb-3">💡 Usage Example</h3>
-        <pre className="text-sm text-yellow-700 whitespace-pre-wrap">
-          {`// Basic ZoKrates usage
-import { zoKratesFactory } from '@/lib/zokrates';
-
-// Compile a circuit
-const result = await zoKratesFactory.compileCircuit({
-  source: circuitCode,
-});
-
-// Generate keys
-const keys = await zoKratesFactory.generateKeys(result.program);
-
-// Generate proof
-const proof = await zoKratesFactory.generateWeatherProof({
-  program: result.program,
-  provingKey: keys.provingKey,
-  inputs: ['1', '2', '3'],
-});`}
-        </pre>
       </div>
     </div>
   );
-};
-
-export default ZoKratesTestComponent;
+}

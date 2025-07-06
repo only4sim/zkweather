@@ -1,32 +1,129 @@
-// Re-import for default export
+// Import types for weather model
+import { CircuitManager, circuitManager } from "./circuit-manager";
 import { ZOKRATES_CONFIG } from "./config";
-import { zoKratesCore } from "./core";
+import { ZoKratesCore, zoKratesCore } from "./core";
 import { zoKratesFactory } from "./factory";
+import type { WeatherModelInputs, WeatherProof } from "./types";
 
 /**
- * ZoKrates Library Index
+ * ZoKrates Integration Library
  *
- * This file exports all ZoKrates modules and utilities for easy importing.
+ * Main entry point for ZoKrates functionality in the weather insurance dApp.
+ * Provides a unified API for circuit compilation, proof generation, and verification.
  */
 
-// Core modules
-export { zoKratesCore, ZoKratesCore } from "./core";
-export { zoKratesFactory, ZoKratesFactory } from "./factory";
+// Core exports
+export { ZoKratesCore, zoKratesCore } from "./core";
+export { zoKratesFactory } from "./factory";
+export { CircuitManager, circuitManager } from "./circuit-manager";
 export { PerformanceMonitor } from "./performance";
 export { ErrorHandler } from "./error-handler";
 
-// Configuration
+// Configuration and types
 export { ZOKRATES_CONFIG } from "./config";
 export type { ZoKratesConfig } from "./config";
 
 // Types
 export type { CompilationResult, SetupResult, ProofResult } from "./core";
-
 export type { CircuitCompilationOptions, ProofGenerationOptions, WeatherProofData } from "./factory";
-
 export type { PerformanceMetrics } from "./performance";
-
 export type { ErrorInfo, OperationType } from "./error-handler";
+
+// Weather model specific exports
+export {
+  RADAR_FEATURES,
+  FEATURE_DESCRIPTIONS,
+  FEATURE_GROUPS,
+  RADAR_FEATURE_COUNT,
+  validateRadarData,
+  formatRadarDataForZoKrates,
+} from "../../constants/radarFeatures";
+
+// Main service class
+export class WeatherModelService {
+  private core: ZoKratesCore;
+  private circuitManager: CircuitManager;
+
+  constructor() {
+    this.core = zoKratesCore;
+    this.circuitManager = circuitManager;
+  }
+
+  /**
+   * Initialize the weather model (compile and setup if needed)
+   */
+  async initialize(): Promise<{
+    success: boolean;
+    error?: string;
+    status: {
+      compiled: boolean;
+      keysSetup: boolean;
+      ready: boolean;
+    };
+  }> {
+    return await this.circuitManager.initializeWeatherModel();
+  }
+
+  /**
+   * Generate proof for weather data
+   */
+  async generateProof(inputs: WeatherModelInputs): Promise<WeatherProof> {
+    // Ensure circuit is initialized
+    const initResult = await this.initialize();
+    if (!initResult.success) {
+      throw new Error(`Failed to initialize weather model: ${initResult.error}`);
+    }
+
+    // Load compiled circuit and proving key
+    const program = await this.circuitManager.loadCompiledCircuit(ZOKRATES_CONFIG.WEATHER_MODEL.NAME);
+    const provingKey = await this.circuitManager.loadProvingKey(ZOKRATES_CONFIG.WEATHER_MODEL.NAME);
+
+    // Generate proof
+    return await this.core.generateWeatherProof(inputs, program, provingKey);
+  }
+
+  /**
+   * Verify weather proof
+   */
+  async verifyProof(proof: WeatherProof): Promise<boolean> {
+    // Load verification key
+    await this.circuitManager.loadVerificationKey(ZOKRATES_CONFIG.WEATHER_MODEL.NAME);
+
+    // Verify proof
+    return await this.core.verifyWeatherProof(proof);
+  }
+
+  /**
+   * Get weather model information
+   */
+  getModelInfo() {
+    return this.core.getWeatherModelInfo();
+  }
+
+  /**
+   * Get circuit status
+   */
+  async getStatus() {
+    return await this.circuitManager.getCircuitStatus(ZOKRATES_CONFIG.WEATHER_MODEL.NAME);
+  }
+
+  /**
+   * Get performance metrics
+   */
+  getMetrics() {
+    return this.core.getPerformanceMetrics();
+  }
+
+  /**
+   * Reset performance metrics
+   */
+  resetMetrics() {
+    this.core.resetPerformanceMetrics();
+  }
+}
+
+// Export singleton instance
+export const weatherModelService = new WeatherModelService();
 
 // Utilities
 export const ZoKratesUtils = {
@@ -103,6 +200,8 @@ export const ZoKratesUtils = {
 const ZoKrates = {
   core: zoKratesCore,
   factory: zoKratesFactory,
+  circuitManager: circuitManager,
+  weatherModelService: weatherModelService,
   config: ZOKRATES_CONFIG,
   utils: ZoKratesUtils,
 };

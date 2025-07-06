@@ -4,9 +4,11 @@
  * This module provides the core integration with ZoKrates for compiling circuits,
  * generating proofs, and managing the ZoKrates workflow.
  */
+import { RADAR_FEATURES, formatRadarDataForZoKrates, validateRadarData } from "../../constants/radarFeatures";
 import { ZOKRATES_CONFIG } from "./config";
 import { ErrorHandler } from "./error-handler";
 import { PerformanceMonitor } from "./performance";
+import { ValidationResult, WeatherModelInputs, WeatherProof } from "./types";
 import { ZokratesProvider, initialize } from "zokrates-js";
 
 export interface CompilationResult {
@@ -226,6 +228,144 @@ export class ZoKratesCore {
    */
   isInitialized(): boolean {
     return this.provider !== null;
+  }
+
+  /**
+   * Weather model specific: Validate and format inputs for the weather model circuit
+   */
+  private validateWeatherInputs(inputs: WeatherModelInputs): ValidationResult {
+    const validation = validateRadarData(inputs.features);
+
+    if (!validation.valid) {
+      return validation;
+    }
+
+    // Additional validation for weather model
+    const errors: string[] = [];
+    const warnings: string[] = [];
+
+    // Check value ranges
+    for (const [feature, value] of Object.entries(inputs.features)) {
+      if (
+        value < ZOKRATES_CONFIG.WEATHER_MODEL.VALUE_RANGES.MIN ||
+        value > ZOKRATES_CONFIG.WEATHER_MODEL.VALUE_RANGES.MAX
+      ) {
+        warnings.push(`Value for ${feature} (${value}) is outside expected range`);
+      }
+    }
+
+    return {
+      valid: errors.length === 0,
+      errors,
+      warnings,
+    };
+  }
+
+  /**
+   * Weather model specific: Format inputs for the ZoKrates circuit
+   */
+  private formatWeatherInputs(inputs: WeatherModelInputs): string[] {
+    const numericInputs = formatRadarDataForZoKrates(inputs.features);
+
+    // The circuit expects 116 inputs (113 features + 3 padding values)
+    while (numericInputs.length < ZOKRATES_CONFIG.WEATHER_MODEL.INPUT_SIZE) {
+      numericInputs.push(0);
+    }
+
+    // Convert to string array for ZoKrates
+    return numericInputs.map(num => num.toString());
+  }
+
+  /**
+   * Weather model specific: Generate proof for weather data
+   */
+  async generateWeatherProof(
+    inputs: WeatherModelInputs,
+    program: Uint8Array,
+    provingKey: Uint8Array,
+  ): Promise<WeatherProof> {
+    const startTime = performance.now();
+
+    // Validate inputs
+    const validation = this.validateWeatherInputs(inputs);
+    if (!validation.valid) {
+      throw new Error(`Invalid weather inputs: ${validation.errors.join(", ")}`);
+    }
+
+    // Log warnings if any
+    if (validation.warnings && validation.warnings.length > 0) {
+      console.warn("⚠️ Weather input warnings:", validation.warnings);
+    }
+
+    // Format inputs for circuit
+    const formattedInputs = this.formatWeatherInputs(inputs);
+
+    // Generate proof using existing method
+    const proofResult = await this.generateProof(program, provingKey, formattedInputs);
+
+    if (!proofResult.success) {
+      throw new Error(`Proof generation failed: ${proofResult.error}`);
+    }
+
+    const endTime = performance.now();
+    const proofGenerationTime = endTime - startTime;
+
+    // Extract prediction from proof inputs (last input should be the prediction)
+    const prediction = parseInt(proofResult.inputs[proofResult.inputs.length - 1] || "0");
+
+    return {
+      proof: proofResult.proof,
+      inputs: proofResult.inputs,
+      metadata: {
+        timestamp: Date.now(),
+        featureCount: RADAR_FEATURES.length,
+        prediction,
+        proofGenerationTime,
+      },
+    };
+  }
+
+  /**
+   * Weather model specific: Verify weather proof
+   */
+  async verifyWeatherProof(proof: WeatherProof): Promise<boolean> {
+    try {
+      // Validate proof structure
+      if (!proof.proof || !proof.inputs || proof.inputs.length === 0) {
+        throw new Error("Invalid proof structure");
+      }
+
+      // Create a simple verification using the ZoKrates provider
+      const provider = await this.initializeProvider();
+
+      // Note: ZoKrates provider doesn't have a direct verify method,
+      // so we'll implement a placeholder for now
+      // In a real implementation, you'd need to use the verifier contract
+      console.log("Using ZoKrates provider for verification:", provider);
+
+      if (ZOKRATES_CONFIG.PERFORMANCE_MONITORING.ENABLED) {
+        console.log(`✅ Weather proof verification: VALID (placeholder)`);
+      }
+
+      return true; // Placeholder - actual verification happens on-chain
+    } catch (error) {
+      console.error("❌ Weather proof verification failed:", error);
+      return false;
+    }
+  }
+
+  /**
+   * Weather model specific: Get circuit information
+   */
+  getWeatherModelInfo() {
+    return {
+      name: ZOKRATES_CONFIG.WEATHER_MODEL.NAME,
+      featuresCount: ZOKRATES_CONFIG.WEATHER_MODEL.FEATURES_COUNT,
+      inputSize: ZOKRATES_CONFIG.WEATHER_MODEL.INPUT_SIZE,
+      outputSize: ZOKRATES_CONFIG.WEATHER_MODEL.OUTPUT_SIZE,
+      features: RADAR_FEATURES,
+      valueRanges: ZOKRATES_CONFIG.WEATHER_MODEL.VALUE_RANGES,
+    };
   }
 }
 
